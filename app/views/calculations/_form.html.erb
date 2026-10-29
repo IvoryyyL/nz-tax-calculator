@@ -1,0 +1,23 @@
+<%= form_with model: calculation, data: { turbo: false } do |form| %>
+  <% if calculation.errors.any? %>
+    <ul class="errors">
+      <% calculation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <table class="form-table">
+    <tr>
+      <th><%= form.label :income, "Annual income" %></th>
+      <td>
+        <div class="money-input <%= "invalid" if calculation.errors[:income].any? %>">
+          <span>$</span>
+          <%= form.number_field :income, min: 0, step: "0.01", placeholder: "e.g. 60000", autofocus: true %>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <%= form.submit "Calculate", class: "button" %>
+<% end %>

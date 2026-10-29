@@ -1,0 +1,206 @@
+/*
+ * This is a manifest file that'll be compiled into application.css.
+ *
+ * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
+ * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
+ * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
+ * depending on specificity.
+ *
+ * Consider organizing styles into separate files for maintainability.
+ */
+
+:root {
+  --bg: #f4f6fa;
+  --card: #ffffff;
+  --text: #1b2333;
+  --muted: #687389;
+  --line: #e3e7ef;
+  --accent: #2f6fde;
+  --accent-hover: #2459b8;
+  --accent-soft: #eaf1fd;
+  --error: #c0362c;
+  --error-soft: #fdeeec;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #11151c;
+    --card: #1a2029;
+    --text: #e7ebf2;
+    --muted: #96a0b2;
+    --line: #2b3340;
+    --accent: #5b8fef;
+    --accent-hover: #7aa5f3;
+    --accent-soft: #1e2b42;
+    --error: #ef7a70;
+    --error-soft: #3a2224;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.5;
+}
+
+/* Calculator page */
+
+.calculator {
+  max-width: 640px;
+  margin: 56px auto;
+  padding: 0 16px;
+}
+
+.calculator h1 {
+  margin: 0;
+  font-size: 1.75rem;
+  letter-spacing: -0.01em;
+}
+
+.subtitle {
+  margin: 4px 0 24px;
+  color: var(--muted);
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 1px 2px rgb(16 24 40 / 0.04), 0 4px 16px rgb(16 24 40 / 0.04);
+}
+
+.errors {
+  margin: 0 0 16px;
+  padding: 12px 16px 12px 32px;
+  background: var(--error-soft);
+  color: var(--error);
+  border-radius: 8px;
+}
+
+.tax-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tax-table th,
+.tax-table td {
+  padding: 10px 8px;
+  text-align: left;
+}
+
+.tax-table .num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Form */
+
+.form-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 16px;
+}
+
+.form-table th {
+  width: 1%;
+  padding: 0 16px 0 0;
+  white-space: nowrap;
+  text-align: left;
+  font-weight: 600;
+}
+
+.form-table td { padding: 0; }
+
+.money-input {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--bg);
+}
+
+.money-input:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.money-input.invalid { border-color: var(--error); }
+.money-input span { color: var(--muted); }
+
+.money-input input {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 1.05rem;
+}
+
+.button {
+  width: 100%;
+  padding: 11px 20px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.button:hover { background: var(--accent-hover); }
+
+/* Result */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 24px 0 8px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: var(--accent-soft);
+}
+
+.stat .label { color: var(--muted); font-size: 0.85rem; }
+.stat .value { font-size: 1.25rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+
+.tax-table thead th {
+  padding-top: 20px;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.tax-table thead th,
+.tax-table tbody td { border-bottom: 1px solid var(--line); }
+
+
+.tax-table tfoot th {
+  padding-top: 14px;
+  font-size: 1.05rem;
+}
+
+@media (max-width: 520px) {
+  .calculator { margin: 32px auto; }
+  .card { padding: 16px; }
+  .stats { grid-template-columns: 1fr; }
+  .form-table th, .form-table td { display: block; width: auto; padding: 0 0 6px; }
+}

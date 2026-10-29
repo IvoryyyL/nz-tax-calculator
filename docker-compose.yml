@@ -1,0 +1,16 @@
+# Development setup: runs the app straight from the official Ruby image.
+# (The Dockerfile that `rails new` creates is for production deploys.)
+services:
+  app:
+    image: ruby:3.3
+    working_dir: /app
+    command: sh -c "rm -f tmp/pids/server.pid && bin/rails server -b 0.0.0.0"
+    ports:
+      - "3001:3000"
+    volumes:
+      - .:/app
+      - bundle-cache:/usr/local/bundle
+    stdin_open: true
+    tty: true
+volumes:
+  bundle-cache:

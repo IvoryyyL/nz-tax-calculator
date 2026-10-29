@@ -1,0 +1,42 @@
+<div class="stats">
+  <div class="stat">
+    <span class="label">Total tax</span>
+    <span class="value"><%= number_to_currency(result[:total]) %></span>
+  </div>
+  <div class="stat">
+    <span class="label">Take-home pay</span>
+    <span class="value"><%= number_to_currency(result[:income] - result[:total]) %></span>
+  </div>
+  <div class="stat">
+    <span class="label">Effective rate</span>
+    <span class="value"><%= rate_percentage(effective_rate(result)) %></span>
+  </div>
+</div>
+
+<table class="tax-table">
+  <thead>
+    <tr>
+      <th>Income band</th>
+      <th class="num">Rate</th>
+      <th class="num">Income</th>
+      <th class="num">Tax</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% result[:lines].select { _1[:taxable].positive? }.each do |line| %>
+      <tr>
+        <td><%= bracket_label(line[:bracket]) %></td>
+        <td class="num"><%= rate_percentage(line[:rate]) %></td>
+        <td class="num"><%= number_to_currency(line[:taxable]) %></td>
+        <td class="num"><%= number_to_currency(line[:tax]) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th colspan="2">Total</th>
+      <th class="num"><%= number_to_currency(result[:income]) %></th>
+      <th class="num"><%= number_to_currency(result[:total]) %></th>
+    </tr>
+  </tfoot>
+</table>
